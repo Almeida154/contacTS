@@ -1,6 +1,28 @@
 version: '3'
 
+networks:
+  server:
+    driver: 'bridge'
+
 services:
+  db:
+    image: mysql
+    container_name: db
+    # command: --default-authentication-plugin=mysql_native_password
+    cap_add:
+      - SYS_NICE
+    security_opt:
+      - seccomp:unconfined
+    environment:
+      MYSQL_DATABASE: esferasoftware
+      # MYSQL_ROOT_PASSWORD: challenge
+      # MYSQL_PASSWORD: challenge
+    volumes:
+      - ./database:/var/lib/mysql
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
   server:
     image: backend/server
     container_name: server_c
@@ -17,7 +39,6 @@ services:
       PORT: 3333
   web:
     stdin_open: true
-    # tty: true
     image: frontend/web
     container_name: web_c
     build:

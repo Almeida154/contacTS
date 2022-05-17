@@ -6,16 +6,17 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "start": "node dist/server.js",
-    "dev": "nodemon -L src/server.ts --nolazy"
+    "dev": "nodemon -L src/server.ts --nolazy",
+    "typeorm": "typeorm-ts-node-esm"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.1",
-    "mysql": "^2.14.1",
+    "mysql2": "^2.3.3",
     "nodemon": "^2.0.16",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
-    "typeorm": "0.3.6"
+    "typeorm": "^0.3.6"
   },
   "devDependencies": {
     "@tsconfig/recommended": "^1.0.1",
