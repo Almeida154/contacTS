@@ -1,24 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { ThemeContext } from 'styled-components';
+import { BarLoader } from 'react-spinners';
 
-interface dataProps {
-  message: string;
-}
+import { Container } from './styles';
 
 const Home = () => {
-  const [data, setData] = useState({} as dataProps);
+  const [isLoading, setLoading] = useState(false);
+  const { colors } = useContext(ThemeContext);
 
   useEffect(() => {
-    (async () => {
-      var req = await fetch('http://localhost:3333/contacts');
-      var res = await req.json();
-      setData(res);
-    })();
+    setTimeout(() => setLoading(false), 3000);
   }, []);
 
   return (
-    <div>
-      <h1>Hello Docker</h1>
-    </div>
+    <>
+      {isLoading ? (
+        <BarLoader
+          color={colors.span}
+          width={150}
+          height={4}
+          loading={isLoading}
+        />
+      ) : (
+        <Container>
+          <h2>Carregou</h2>
+          <p>daora</p>
+        </Container>
+      )}
+    </>
   );
 };
 
