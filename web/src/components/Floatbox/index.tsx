@@ -1,12 +1,23 @@
 import React from 'react';
+// @ts-ignore
+import Sticky from 'react-stickynode';
 
 import { Container } from './styles';
 
-const Floatbox: React.FC = () => {
+interface FloatboxProps {
+  contactsContainerHeight: number;
+}
+
+const Floatbox: React.FC<FloatboxProps> = ({ contactsContainerHeight }) => {
   return (
-    <Container>
-      <h1>Helloooo</h1>
-    </Container>
+    <Sticky
+      top={1.8 * 18}
+      enabled={contactsContainerHeight > 300}
+      bottomBoundary={contactsContainerHeight + 1.8 * 18}>
+      <Container>
+        <h1>Floatbox</h1>
+      </Container>
+    </Sticky>
   );
 };
 

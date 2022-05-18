@@ -12,8 +12,8 @@ export default createGlobalStyle`
         -webkit-font-smoothing: antialiased;
         color: ${props => props.theme.colors.text};
         display: flex;
+        flex-direction: column;
         justify-content: center;
-        align-items: center;
         min-height: 100vh;
     }
 
