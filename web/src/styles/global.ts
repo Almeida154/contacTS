@@ -31,4 +31,9 @@ export default createGlobalStyle`
     h6 {
         color: ${props => props.theme.colors.title};
     }
+
+    a {
+        text-decoration: none;
+        color: ${props => props.theme.colors.text}
+    }
 `;

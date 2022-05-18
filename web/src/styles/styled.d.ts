@@ -12,6 +12,11 @@ declare module 'styled-components' {
       lightBox: string;
       box: string;
       background: string;
+
+      danger_light: string;
+      danger_strong: string;
+      success_light: string;
+      success_strong: string;
     };
   }
 }

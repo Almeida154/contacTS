@@ -36,7 +36,7 @@ const Floatbox: React.FC<FloatboxProps> = ({
             setSearch(query);
           }}
         />
-        <Button text='Adicionar' onPress={() => {}} />
+        <Button text='Adicionar' isLink />
 
         <ThemeSwitch>
           <span>Dark mode</span>

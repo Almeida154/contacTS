@@ -4,6 +4,7 @@
 const dark = {
   title: 'dark',
   colors: {
+    // Visual identity
     primary: '#efc9a3',
     secondary: '#9F8670',
     title: '#F5F7FA',
@@ -12,6 +13,13 @@ const dark = {
     lightBox: '#52606d',
     box: '#1F2933',
     background: '#1e2025',
+
+    // Features
+    danger_light: '#FCD8DB',
+    danger_strong: '#AD6468',
+
+    success_light: '#E2FFD8',
+    success_strong: '#88D276',
   },
 };
 
