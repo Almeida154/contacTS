@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { rgba } from 'polished';
 
-export const Container = styled.a`
+export const Container = styled.div`
   margin-top: 1rem;
   display: flex;
   gap: 0.5rem;

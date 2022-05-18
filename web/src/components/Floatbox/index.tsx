@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-// @ts-ignore
 import Sticky from 'react-stickynode';
 import { ThemeContext } from 'styled-components';
 import Switch from 'react-switch';
