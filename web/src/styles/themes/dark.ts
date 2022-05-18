@@ -9,6 +9,7 @@ const dark = {
     title: '#F5F7FA',
     text: '#CBD2D9',
     span: '#9AA5B1',
+    lightBox: '#52606d',
     box: '#1F2933',
     background: '#1e2025',
   },

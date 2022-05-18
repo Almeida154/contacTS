@@ -1,19 +1,9 @@
 import React from 'react';
-import { ThemeProvider } from 'styled-components';
 
-import GlobalStyle from './styles/global';
-import dark from './styles/themes/dark';
-
-import Home from './pages/Home';
+import Router from './routes';
 
 function App() {
-  return (
-    // @ts-ignore
-    <ThemeProvider theme={dark}>
-      <GlobalStyle />
-      <Home />
-    </ThemeProvider>
-  );
+  return <Router />;
 }
 
 export default App;

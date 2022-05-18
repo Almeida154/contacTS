@@ -11,6 +11,7 @@ export const Container = styled.div`
   align-items: center;
   cursor: pointer;
   transition: 0.2s;
+  height: min-content;
 
   :hover {
     background-color: ${props => rgba(props.theme.colors.primary, 0.04)};
@@ -22,7 +23,7 @@ export const ProfileImage = styled.div`
   width: 70px;
   height: 70px;
   border-radius: ${metrics.radius};
-  background: #52606d;
+  background: ${props => props.theme.colors.lightBox};
   font-weight: 700;
   display: flex;
   justify-content: center;

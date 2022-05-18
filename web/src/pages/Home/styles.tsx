@@ -26,6 +26,7 @@ export const ContactsContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 0.9rem;
+  height: min-content;
 `;
 
 export const FloatboxContainer = styled.div`

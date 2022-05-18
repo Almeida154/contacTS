@@ -36,10 +36,16 @@ interface Contact {
   ];
 }
 
-const Home = () => {
+interface HomeProps {
+  toggleTheme: () => void;
+}
+
+const Home: React.FC<HomeProps> = ({ toggleTheme }) => {
   const [isLoading, setLoading] = useState(true);
   const [contactsContainerHeight, setContactsContainerHeight] = useState(0);
   const [contacts, setContacts] = useState<Contact[]>([]);
+  const [filteredContacts, setFilteredContacts] = useState<Contact[]>([]);
+  const [search, setSearch] = useState('');
 
   const { colors } = useContext(ThemeContext);
   const contactsContainerRef = useRef<HTMLDivElement>(null);
@@ -49,14 +55,28 @@ const Home = () => {
     setContacts(contacts.data);
   }
 
-  useEffect(() => {
-    handleListContacts();
-
+  function handleLoadingTimeout() {
     setTimeout(() => {
       const height = Number(contactsContainerRef.current?.clientHeight);
       setContactsContainerHeight(height);
       setLoading(false);
     }, 1000);
+  }
+
+  useEffect(() => {
+    const filteredContacts = contacts.filter(contact =>
+      (contact.firstName + ' ' + contact.lastName)
+        .toLocaleLowerCase()
+        .includes(search.toLocaleLowerCase().trim())
+    );
+
+    setFilteredContacts(filteredContacts);
+    handleLoadingTimeout();
+  }, [search, contacts]);
+
+  useEffect(() => {
+    handleListContacts();
+    handleLoadingTimeout();
   }, []);
 
   return (
@@ -74,12 +94,20 @@ const Home = () => {
         <>
           <Container>
             <FloatboxContainer>
-              <Floatbox contactsContainerHeight={contactsContainerHeight} />
+              <Floatbox
+                contactsContainerHeight={contactsContainerHeight}
+                toggleTheme={toggleTheme}
+                setSearch={setSearch}
+              />
             </FloatboxContainer>
             <ContactsContainer ref={contactsContainerRef}>
-              {contacts.map(contact => (
-                <Card key={contact.id} contact={contact} />
-              ))}
+              {search === ''
+                ? contacts.map(contact => (
+                    <Card key={contact.id} contact={contact} />
+                  ))
+                : filteredContacts.map(contact => (
+                    <Card key={contact.id} contact={contact} />
+                  ))}
             </ContactsContainer>
           </Container>
           <Footer />
