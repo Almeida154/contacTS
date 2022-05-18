@@ -13,6 +13,7 @@ import Floatbox from '../../components/Floatbox';
 import Footer from '../../components/Footer';
 
 import api from '../../services/api';
+import Card from '../../components/Card';
 
 interface Contact {
   id: string;
@@ -77,7 +78,7 @@ const Home = () => {
             </FloatboxContainer>
             <ContactsContainer ref={contactsContainerRef}>
               {contacts.map(contact => (
-                <h1>{contact.firstName}</h1>
+                <Card key={contact.id} contact={contact} />
               ))}
             </ContactsContainer>
           </Container>

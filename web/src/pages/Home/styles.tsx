@@ -23,6 +23,9 @@ export const Container = styled.div`
 
 export const ContactsContainer = styled.div`
   flex: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.9rem;
 `;
 
 export const FloatboxContainer = styled.div`
