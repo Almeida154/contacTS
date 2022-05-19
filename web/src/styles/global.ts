@@ -8,13 +8,14 @@ export default createGlobalStyle`
     }
 
     body {
+        position: relative;
         background: ${props => props.theme.colors.background};
         -webkit-font-smoothing: antialiased;
         color: ${props => props.theme.colors.text};
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        min-height: 100vh;
+        justify-content: flex-start;
+        min-height: calc(100vh);
     }
 
     body,

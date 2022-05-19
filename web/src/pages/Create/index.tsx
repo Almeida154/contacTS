@@ -5,6 +5,7 @@ import InputMask from 'react-input-mask';
 import toast, { Toaster } from 'react-hot-toast';
 import { ThemeContext } from 'styled-components';
 
+import api from '../../services/api';
 import verifyCpf from '../../utils/verifyCpf';
 
 import {
@@ -24,8 +25,8 @@ import Footer from '../../components/Footer';
 type Contact = {
   firstName: string;
   lastName: string;
-  cpf?: string;
-  emails?: string[];
+  cpf: string | null;
+  emails: string[] | null;
   telephones: string[];
 };
 
@@ -37,7 +38,7 @@ const Create = () => {
   const [phones, setPhones] = useState<string[]>(['']);
 
   const { colors } = useContext(ThemeContext);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const showToast = (type: string, message: string) => {
     switch (type) {
@@ -47,7 +48,7 @@ const Create = () => {
           duration: 2000,
         });
         break;
-      case 'sucess':
+      case 'success':
         toast.success(message, {
           position: 'top-right',
           duration: 2000,
@@ -117,7 +118,7 @@ const Create = () => {
     return isValid;
   };
 
-  function handleCreateContact(e: FormEvent) {
+  async function handleCreateContact(e: FormEvent) {
     e.preventDefault();
     console.clear();
 
@@ -132,11 +133,11 @@ const Create = () => {
     console.log('hasPhoneDuplicated', hasPhoneDuplicated);
 
     var areAllEmailsValid =
-      emails.length > 1 ? areEmailsValid(emails) : true;
+      emails[0] !== '' ? areEmailsValid(emails) : true;
     console.log('areAllEmailsValid', areAllEmailsValid);
 
     var hasEmailDuplicated =
-      emails.length > 1 ? isDuplicated(emails) : false;
+      emails[0] !== '' ? isDuplicated(emails) : false;
     console.log('hasEmailDuplicated', hasEmailDuplicated);
 
     var isCPFValid = cpf.length === 0 ? true : isCpfValid(cpf);
@@ -149,20 +150,22 @@ const Create = () => {
       areAllEmailsValid &&
       isCPFValid
     ) {
-      console.log('passo');
-      // if (emails.length > 1 && !isEmailsValid(emails)) return;
-      // if (cpf !== '' && !isCpfValid(cpf)) return;
+      const newContact: Contact = {
+        firstName: firstName,
+        lastName: lastName,
+        cpf: cpf.length === 0 ? null : cpf,
+        emails: emails[0] === '' ? null : emails,
+        telephones: phones,
+      };
 
-      // const newContact: Contact = {
-      //   firstName: firstName,
-      //   lastName: lastName,
-      //   cpf: cpf !== '' ? cpf : undefined,
-      //   emails: emails[0] !== '' ? emails : undefined,
-      //   telephones: phones,
-      // };
-      // console.log(newContact);
+      const response = await api.post('contact', { ...newContact });
 
-      // navigate({ pathname: '/' });
+      if (response.data.error)
+        return showToast('error', response.data.error);
+
+      showToast('success', response.data.success);
+      console.log(response.data);
+      navigate({ pathname: '/' });
     }
   }
 

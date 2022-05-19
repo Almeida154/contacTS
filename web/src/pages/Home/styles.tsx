@@ -19,6 +19,7 @@ export const Container = styled.div`
   gap: ${metrics.padding};
   margin: 0 auto;
   padding: ${metrics.padding};
+  margin-bottom: 310px;
 `;
 
 export const ContactsContainer = styled.div`

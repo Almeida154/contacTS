@@ -41,15 +41,17 @@ const Card: React.FC<CardProps> = ({ contact }) => {
           <ul>
             <li>
               <BiPhone size={14} />
-              {contact.telephones.length} telefones
+              {contact.telephones.length}{' '}
+              {contact.telephones.length > 1 ? 'Telefones' : 'Telefone'}
             </li>
             {contact.emails.length > 0 && (
               <li>
                 <BiAt size={14} />
-                {contact.emails.length} emails
+                {contact.emails.length}{' '}
+                {contact.emails.length > 1 ? 'Emails' : 'Email'}
               </li>
             )}
-            {contact.cpf !== '' && <li>cpf</li>}
+            {contact.cpf && <li>cpf</li>}
           </ul>
         </Details>
       </div>

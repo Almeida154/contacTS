@@ -15,13 +15,13 @@ class ContactController {
     const { firstName, lastName, cpf, telephones, emails } = req.body;
 
     if (!firstName || !lastName || telephones.length < 1)
-      return res.json({ message: 'Preencha os campos obrigatórios' });
+      return res.json({ error: 'Preencha os campos obrigatórios' });
 
     if (cpf) {
       var contactExists = await contactRepository.findOne({
         where: { cpf },
       });
-      if (contactExists) return res.json({ message: 'Cpf já cadastrado' });
+      if (contactExists) return res.json({ error: 'Cpf já cadastrado' });
     }
 
     const contact = contactRepository.create({
@@ -49,7 +49,10 @@ class ContactController {
         await emailRepository.save(newEmail);
       });
 
-    return res.json(contact);
+    return res.json({
+      success: 'Contato criado com sucesso',
+      contact,
+    });
   }
 
   async update(req: Request, res: Response) {

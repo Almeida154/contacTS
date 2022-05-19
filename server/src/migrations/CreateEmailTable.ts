@@ -7,7 +7,7 @@ export class CreateEmailTable implements MigrationInterface {
         name: 'email',
         columns: [
           { name: 'id', type: 'uuid' },
-          { name: 'address', type: 'varchar', isUnique: true },
+          { name: 'address', type: 'varchar' },
           { name: 'contact_id', type: 'uuid' },
         ],
         foreignKeys: [

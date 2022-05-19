@@ -11,9 +11,9 @@ import {
 
 import Floatbox from '../../components/Floatbox';
 import Footer from '../../components/Footer';
+import Card from '../../components/Card';
 
 import api from '../../services/api';
-import Card from '../../components/Card';
 
 interface Contact {
   id: string;
@@ -77,7 +77,7 @@ const Home: React.FC<HomeProps> = ({ toggleTheme }) => {
   useEffect(() => {
     handleListContacts();
     handleLoadingTimeout();
-  }, []);
+  }, [contacts]);
 
   return (
     <>
@@ -101,13 +101,28 @@ const Home: React.FC<HomeProps> = ({ toggleTheme }) => {
               />
             </FloatboxContainer>
             <ContactsContainer ref={contactsContainerRef}>
-              {search === ''
-                ? contacts.map(contact => (
+              {contacts.length > 0 ? (
+                search === '' ? (
+                  contacts.map(contact => (
                     <Card key={contact.id} contact={contact} />
                   ))
-                : filteredContacts.map(contact => (
+                ) : (
+                  filteredContacts.map(contact => (
                     <Card key={contact.id} contact={contact} />
-                  ))}
+                  ))
+                )
+              ) : (
+                <h2
+                  style={{
+                    textAlign: 'center',
+                    width: '100%',
+                    color: colors.text,
+                    opacity: 0.3,
+                    marginTop: 16 * 1.8,
+                  }}>
+                  Nada encontrado :(
+                </h2>
+              )}
             </ContactsContainer>
           </Container>
           <Footer />

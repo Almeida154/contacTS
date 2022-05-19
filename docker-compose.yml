@@ -15,8 +15,7 @@ services:
       - seccomp:unconfined
     environment:
       MYSQL_DATABASE: esferasoftware
-      # MYSQL_ROOT_PASSWORD: challenge
-      # MYSQL_PASSWORD: challenge
+      MYSQL_ROOT_PASSWORD: challenge
     volumes:
       - ./database:/var/lib/mysql
     ports:
