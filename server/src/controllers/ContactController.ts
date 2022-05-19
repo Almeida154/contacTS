@@ -41,7 +41,7 @@ class ContactController {
     });
 
     if (emails)
-      emails.map(async (address: string) => {
+      emails?.map(async (address: string) => {
         var newEmail = emailRepository.create({
           address,
           contact,
@@ -61,15 +61,7 @@ class ContactController {
     const emailRepository = AppDataSource.getRepository(Email);
 
     const { id } = req.params;
-    const {
-      firstName,
-      lastName,
-      cpf,
-      telephones,
-      emails,
-      deletedTelephones,
-      deletedEmails,
-    } = req.body;
+    const { firstName, lastName, cpf, telephones, emails } = req.body;
 
     if (!firstName || !lastName)
       return res.json({ error: 'Preencha os campos obrigatórios' });
@@ -80,19 +72,6 @@ class ContactController {
 
     if (!contact) return res.json({ error: 'Algo deu errado' });
 
-    const contactTelephonesQuantity =
-      await telephoneRepository.findAndCountBy({
-        contact,
-      });
-
-    if (
-      deletedTelephones &&
-      contactTelephonesQuantity[1] == deletedTelephones.length
-    )
-      return res.json({
-        error: 'O contato deve ter ao menos 1 telefone',
-      });
-
     if (cpf) {
       var cpfExists = await contactRepository.findOne({
         where: { cpf, id: Not(id) },
@@ -100,28 +79,21 @@ class ContactController {
       if (cpfExists) return res.json({ error: 'Cpf já cadastrado' });
     }
 
-    if (deletedTelephones)
-      deletedTelephones.map(async (number: string) => {
-        let telephone = await telephoneRepository.findOne({
-          where: { number },
-        });
-        telephone && (await telephoneRepository.remove(telephone));
-      });
+    const allEmails = await emailRepository.find({
+      where: { contact: contact },
+    });
+    allEmails.map(async email => await emailRepository.delete(email));
 
-    if (deletedEmails)
-      deletedEmails.map(async (address: string) => {
-        let email = await emailRepository.findOne({
-          where: { address },
-        });
-        email && (await emailRepository.remove(email));
-      });
+    const allTelephones = await telephoneRepository.find({
+      where: { contact: contact },
+    });
+    allTelephones.map(
+      async phone => await telephoneRepository.delete(phone)
+    );
 
     if (telephones)
       telephones.map(async (number: string) => {
-        let telephone = await telephoneRepository.findOne({
-          where: { number, contact_id: id },
-        });
-        if (!telephone && contact) {
+        if (contact) {
           let newTelephone = telephoneRepository.create({
             number,
             contact,
@@ -132,10 +104,7 @@ class ContactController {
 
     if (emails)
       emails.map(async (address: string) => {
-        let email = await emailRepository.findOne({
-          where: { address, contact_id: id },
-        });
-        if (!email && contact) {
+        if (contact) {
           let newEmail = emailRepository.create({
             address,
             contact,
@@ -146,6 +115,7 @@ class ContactController {
 
     cpf === '' ? null : cpf;
 
+    // @ts-ignore
     var updatedContact: Contact = {
       ...contact,
       firstName,

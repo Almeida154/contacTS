@@ -192,15 +192,15 @@ const Detail = () => {
 
       console.log(newContact);
 
-      // const response = await api.put(`contact/update/${contactId}`, {
-      //   ...newContact,
-      // });
+      const response = await api.put(`contact/update/${contactId}`, {
+        ...newContact,
+      });
 
-      // if (response.data.error)
-      //   return showToast('error', response.data.error);
+      if (response.data.error)
+        return showToast('error', response.data.error);
 
-      // showToast('success', response.data.success);
-      // console.log(response.data);
+      showToast('success', response.data.success);
+      console.log(response.data);
       // navigate({ pathname: '/' });
     }
   }
