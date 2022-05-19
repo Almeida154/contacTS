@@ -1,10 +1,11 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useState, useContext } from 'react';
 import { BiArrowBack, BiTrash } from 'react-icons/bi';
 import { Link, useNavigate } from 'react-router-dom';
 import InputMask from 'react-input-mask';
 import toast, { Toaster } from 'react-hot-toast';
+import { ThemeContext } from 'styled-components';
 
-import Footer from '../../components/Footer';
+import verifyCpf from '../../utils/verifyCpf';
 
 import {
   Container,
@@ -16,7 +17,9 @@ import {
   FormContainer,
   InputContainer,
 } from './styles';
+
 import Button from '../../components/Button';
+import Footer from '../../components/Footer';
 
 type Contact = {
   firstName: string;
@@ -33,29 +36,134 @@ const Create = () => {
   const [emails, setEmails] = useState<string[]>(['']);
   const [phones, setPhones] = useState<string[]>(['']);
 
+  const { colors } = useContext(ThemeContext);
   // const navigate = useNavigate();
+
+  const showToast = (type: string, message: string) => {
+    switch (type) {
+      case 'error':
+        toast.error(message, {
+          position: 'top-right',
+          duration: 2000,
+        });
+        break;
+      case 'sucess':
+        toast.success(message, {
+          position: 'top-right',
+          duration: 2000,
+        });
+        break;
+      case 'alert':
+        toast.success(message, {
+          position: 'top-right',
+          duration: 2000,
+        });
+        break;
+      default:
+        break;
+    }
+  };
+
+  const isMandatoryFieldsFilled = (
+    firstName: string,
+    lastName: string,
+    phones: string[]
+  ) => {
+    if (firstName === '') {
+      showToast('error', 'Preencha todos os campos');
+      return false;
+    }
+
+    if (lastName === '') {
+      showToast('error', 'Preencha todos os campos');
+      return false;
+    }
+
+    const invalidPhones = phones.filter(phone => phone.length !== 15);
+    if (invalidPhones.length > 0) {
+      showToast('error', 'Número inválido');
+      return false;
+    }
+    return true;
+  };
+
+  const isDuplicated = (arr: string[]) => {
+    const isDuplicated = arr.some(
+      (item: string, index: number) => index !== arr.indexOf(item)
+    );
+    if (isDuplicated) {
+      showToast('error', 'Campos repetidos!');
+      return true;
+    }
+    return false;
+  };
+
+  const areEmailsValid = (emails: string[]) => {
+    var regex = /\S+@\S+\.\S+/;
+    var theresInvalid = emails.every(email => {
+      return regex.test(email);
+    });
+    !theresInvalid && showToast('error', 'Email inválido');
+    return theresInvalid;
+  };
+
+  const isCpfValid = (cpf: string) => {
+    // 535.091.238-08
+    const stringfiedCPF = cpf.replaceAll('.', '').replace('-', '');
+
+    const isValid = verifyCpf(stringfiedCPF);
+    !isValid && showToast('error', 'Cpf inválido');
+
+    return isValid;
+  };
 
   function handleCreateContact(e: FormEvent) {
     e.preventDefault();
+    console.clear();
 
-    toast.success('Sucesso papai', {
-      position: 'top-right',
-      duration: 2000,
-      iconTheme: {
-        primary: 'black',
-        secondary: 'white',
-      },
-    });
+    var isAllMandatoryFieldsFilled = isMandatoryFieldsFilled(
+      firstName,
+      lastName,
+      phones
+    );
+    console.log('isAllMandatoryFieldsFilled', isAllMandatoryFieldsFilled);
 
-    // const newContact: Contact = {
-    //   firstName: firstName,
-    //   lastName: lastName,
-    //   cpf: cpf !== '' ? cpf : undefined,
-    //   emails: emails[0] !== '' ? emails : undefined,
-    //   telephones: phones,
-    // };
-    // console.log(newContact);
-    // navigate({ pathname: '/' });
+    var hasPhoneDuplicated = isDuplicated(phones);
+    console.log('hasPhoneDuplicated', hasPhoneDuplicated);
+
+    var areAllEmailsValid =
+      emails.length > 1 ? areEmailsValid(emails) : true;
+    console.log('areAllEmailsValid', areAllEmailsValid);
+
+    var hasEmailDuplicated =
+      emails.length > 1 ? isDuplicated(emails) : false;
+    console.log('hasEmailDuplicated', hasEmailDuplicated);
+
+    var isCPFValid = cpf.length === 0 ? true : isCpfValid(cpf);
+    console.log('isCPFValid', isCPFValid);
+
+    if (
+      isAllMandatoryFieldsFilled &&
+      !hasPhoneDuplicated &&
+      !hasEmailDuplicated &&
+      areAllEmailsValid &&
+      isCPFValid
+    ) {
+      console.log('passo');
+      // if (emails.length > 1 && !isEmailsValid(emails)) return;
+      // if (cpf !== '' && !isCpfValid(cpf)) return;
+
+      // const newContact: Contact = {
+      //   firstName: firstName,
+      //   lastName: lastName,
+      //   cpf: cpf !== '' ? cpf : undefined,
+      //   emails: emails[0] !== '' ? emails : undefined,
+      //   telephones: phones,
+      // };
+      // console.log(newContact);
+
+      // navigate({ pathname: '/' });
+    }
   }
 
   function handleNewEmailInput() {
@@ -218,7 +326,34 @@ const Create = () => {
         </FormContainer>
       </Container>
       <Footer />
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          success: {
+            style: {
+              background: colors.success_light,
+              color: colors.success_stronger,
+              border: `3px solid ${colors.success_stronger}`,
+              fontWeight: 600,
+            },
+            iconTheme: {
+              primary: colors.success_stronger,
+              secondary: colors.success_light,
+            },
+          },
+          error: {
+            style: {
+              background: colors.danger_light,
+              color: colors.danger_stronger,
+              border: `3px solid ${colors.danger_stronger}`,
+              fontWeight: 600,
+            },
+            iconTheme: {
+              primary: colors.danger_stronger,
+              secondary: colors.danger_light,
+            },
+          },
+        }}
+      />
     </>
   );
 };

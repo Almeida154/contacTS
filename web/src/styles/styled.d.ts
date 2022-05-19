@@ -15,8 +15,13 @@ declare module 'styled-components' {
 
       danger_light: string;
       danger_strong: string;
+      danger_stronger: string;
       success_light: string;
       success_strong: string;
+      success_stronger: string;
+      alert_light: string;
+      alert_strong: string;
+      alert_stronger: string;
     };
   }
 }

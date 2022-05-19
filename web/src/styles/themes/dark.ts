@@ -17,9 +17,15 @@ const dark = {
     // Features
     danger_light: '#FCD8DB',
     danger_strong: '#AD6468',
+    danger_stronger: '#5F1A22',
 
     success_light: '#E2FFD8',
     success_strong: '#88D276',
+    success_stronger: '#195009',
+
+    alert_light: '#FFFED9',
+    alert_strong: '#B8B44C',
+    alert_stronger: '#494101',
   },
 };
 

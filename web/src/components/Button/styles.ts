@@ -19,6 +19,7 @@ export const Container = styled.button`
   font-size: 0.8rem;
   cursor: pointer;
   height: 48px;
+  width: 100%;
   transition: 0.3s;
 
   &.short {
