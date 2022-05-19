@@ -70,7 +70,7 @@ const Detail = () => {
       contact.emails && setEmails(emailAddresses!);
       setPhones(phoneNumbers);
     })();
-  }, [params.id, contactId]);
+  }, [contactId, params.id]);
 
   const showToast = (type: string, message: string) => {
     switch (type) {
@@ -192,16 +192,16 @@ const Detail = () => {
 
       console.log(newContact);
 
-      const response = await api.put(`contact/update/${contactId}`, {
-        ...newContact,
-      });
+      // const response = await api.put(`contact/update/${contactId}`, {
+      //   ...newContact,
+      // });
 
-      if (response.data.error)
-        return showToast('error', response.data.error);
+      // if (response.data.error)
+      //   return showToast('error', response.data.error);
 
-      showToast('success', response.data.success);
-      console.log(response.data);
-      navigate({ pathname: '/' });
+      // showToast('success', response.data.success);
+      // console.log(response.data);
+      // navigate({ pathname: '/' });
     }
   }
 
@@ -289,16 +289,17 @@ const Detail = () => {
                       name='email'
                       id='email'
                       placeholder='exemplo@email.com'
-                      value={emails[index]}
+                      value={email}
                       onChange={e => {
                         var newEmail = e.target.value.toString();
-                        var newEmails = emails;
+                        var newEmails = [...emails];
                         newEmails[index] = newEmail;
                         setEmails(newEmails);
                       }}
                     />
                     {index > 0 && (
                       <DeleteInput
+                        type='button'
                         onClick={() => {
                           handleRemoveEmailInput(index);
                         }}
@@ -332,13 +333,14 @@ const Detail = () => {
                       value={phone}
                       onChange={e => {
                         var newPhone = e.target.value.toString();
-                        var newPhones = phones;
+                        var newPhones = [...phones];
                         newPhones[index] = newPhone;
                         setPhones(newPhones);
                       }}
                     />
                     {index > 0 && (
                       <DeleteInput
+                        type='button'
                         onClick={() => {
                           handleRemovePhoneInput(index);
                         }}

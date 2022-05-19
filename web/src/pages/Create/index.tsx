@@ -174,8 +174,7 @@ const Create = () => {
   }
 
   function handleRemoveEmailInput(index: number) {
-    let newEmails = [...emails];
-    newEmails.splice(index, 1);
+    const newEmails = emails.filter((email, i) => i !== index);
     setEmails(newEmails);
   }
 
@@ -254,15 +253,17 @@ const Create = () => {
                       name='email'
                       id='email'
                       placeholder='exemplo@email.com'
+                      value={email}
                       onChange={e => {
                         var newEmail = e.target.value.toString();
-                        var newEmails = emails;
+                        var newEmails = [...emails];
                         newEmails[index] = newEmail;
                         setEmails(newEmails);
                       }}
                     />
                     {index > 0 && (
                       <DeleteInput
+                        type='button'
                         onClick={() => {
                           handleRemoveEmailInput(index);
                         }}
@@ -293,15 +294,17 @@ const Create = () => {
                       type='text'
                       name='phone'
                       id='phone'
+                      value={phone}
                       onChange={e => {
                         var newPhone = e.target.value.toString();
-                        var newPhones = phones;
+                        var newPhones = [...phones];
                         newPhones[index] = newPhone;
                         setPhones(newPhones);
                       }}
                     />
                     {index > 0 && (
                       <DeleteInput
+                        type='button'
                         onClick={() => {
                           handleRemovePhoneInput(index);
                         }}
