@@ -72,13 +72,13 @@ class ContactController {
     } = req.body;
 
     if (!firstName || !lastName)
-      return res.json({ message: 'Preencha os campos obrigatórios' });
+      return res.json({ error: 'Preencha os campos obrigatórios' });
 
     var contact = await contactRepository.findOne({
       where: { id },
     });
 
-    if (!contact) return res.json({ message: 'Algo deu errado' });
+    if (!contact) return res.json({ error: 'Algo deu errado' });
 
     const contactTelephonesQuantity =
       await telephoneRepository.findAndCountBy({
@@ -90,14 +90,14 @@ class ContactController {
       contactTelephonesQuantity[1] == deletedTelephones.length
     )
       return res.json({
-        message: 'O contato deve ter ao menos 1 telefone',
+        error: 'O contato deve ter ao menos 1 telefone',
       });
 
     if (cpf) {
       var cpfExists = await contactRepository.findOne({
         where: { cpf, id: Not(id) },
       });
-      if (cpfExists) return res.json({ message: 'Cpf já cadastrado' });
+      if (cpfExists) return res.json({ error: 'Cpf já cadastrado' });
     }
 
     if (deletedTelephones)
@@ -119,7 +119,7 @@ class ContactController {
     if (telephones)
       telephones.map(async (number: string) => {
         let telephone = await telephoneRepository.findOne({
-          where: { number },
+          where: { number, contact_id: id },
         });
         if (!telephone && contact) {
           let newTelephone = telephoneRepository.create({
@@ -133,7 +133,7 @@ class ContactController {
     if (emails)
       emails.map(async (address: string) => {
         let email = await emailRepository.findOne({
-          where: { address },
+          where: { address, contact_id: id },
         });
         if (!email && contact) {
           let newEmail = emailRepository.create({
@@ -156,7 +156,7 @@ class ContactController {
     updatedContact = contactRepository.create(updatedContact);
     await contactRepository.save(updatedContact);
 
-    return res.json({ updatedContact });
+    return res.json({ success: 'Contato atualizado', updatedContact });
   }
 
   async all(req: Request, res: Response) {

@@ -246,7 +246,7 @@ const Create = () => {
               </Field>
 
               <Field>
-                <label htmlFor='email'>Email</label>
+                <label htmlFor='email'>Email(s)</label>
                 {emails.map((email, index) => (
                   <InputContainer key={index}>
                     <input
@@ -282,7 +282,7 @@ const Create = () => {
 
               <Field>
                 <label className='mandatory' htmlFor='phone'>
-                  Número
+                  Número(s)
                 </label>
                 {phones.map((phone, index) => (
                   <InputContainer key={index}>

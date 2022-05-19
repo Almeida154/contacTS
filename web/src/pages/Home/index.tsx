@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { ThemeContext } from 'styled-components';
 import { BarLoader } from 'react-spinners';
+import { useNavigate } from 'react-router-dom';
 
 import {
   ContactsContainer,
@@ -48,6 +49,7 @@ const Home: React.FC<HomeProps> = ({ toggleTheme }) => {
   const [search, setSearch] = useState('');
 
   const { colors } = useContext(ThemeContext);
+  const navigate = useNavigate();
   const contactsContainerRef = useRef<HTMLDivElement>(null);
 
   async function handleListContacts() {
@@ -104,11 +106,23 @@ const Home: React.FC<HomeProps> = ({ toggleTheme }) => {
               {contacts.length > 0 ? (
                 search === '' ? (
                   contacts.map(contact => (
-                    <Card key={contact.id} contact={contact} />
+                    <Card
+                      key={contact.id}
+                      contact={contact}
+                      onPress={() =>
+                        navigate({ pathname: `/detail/${contact.id}` })
+                      }
+                    />
                   ))
                 ) : (
                   filteredContacts.map(contact => (
-                    <Card key={contact.id} contact={contact} />
+                    <Card
+                      key={contact.id}
+                      contact={contact}
+                      onPress={() =>
+                        navigate({ pathname: `/detail/${contact.id}` })
+                      }
+                    />
                   ))
                 )
               ) : (

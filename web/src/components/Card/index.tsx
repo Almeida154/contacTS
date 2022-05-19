@@ -25,11 +25,12 @@ interface Contact {
 
 interface CardProps {
   contact: Contact;
+  onPress: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ contact }) => {
+const Card: React.FC<CardProps> = ({ contact, onPress }) => {
   return (
-    <Container>
+    <Container onClick={onPress}>
       <ProfileImage>
         {contact.firstName.charAt(0) + contact.lastName.charAt(0)}
       </ProfileImage>

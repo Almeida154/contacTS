@@ -9,6 +9,7 @@ import light from './styles/themes/light';
 
 import Home from './pages/Home';
 import Create from './pages/Create';
+import Detail from './pages/Detail';
 
 const Router: React.FC = () => {
   const [theme, setTheme] = usePersistedState('@theme', dark);
@@ -23,6 +24,7 @@ const Router: React.FC = () => {
         <Routes>
           <Route path='/' element={<Home toggleTheme={toggleTheme} />} />
           <Route path='/create' element={<Create />} />
+          <Route path='/detail/:id' element={<Detail />} />
         </Routes>
       </ThemeProvider>
     </BrowserRouter>
