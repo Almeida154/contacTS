@@ -3,9 +3,13 @@ import { rgba } from 'polished';
 import metrics from '../../styles/metrics';
 
 export const Container = styled.div`
-  background-color: ${props => props.theme.colors.box};
+  background-color: ${(props) => props.theme.colors.box};
   padding: ${metrics.padding};
   border-radius: ${metrics.radius};
+
+  img {
+    width: 50%;
+  }
 `;
 
 export const Searchbar = styled.input`
@@ -20,17 +24,18 @@ export const Searchbar = styled.input`
   outline: none;
   border: none;
   padding: 0.9rem;
-  outline: 2px solid ${props => props.theme.colors.primary};
-  background-color: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors.primary};
+  outline: 2px solid ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.primary};
   transition: 0.3s;
 
   ::placeholder {
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
   }
 
   :focus {
-    background-color: ${props => rgba(props.theme.colors.primary, 0.2)};
+    background-color: ${(props) =>
+      rgba(props.theme.colors.primary, 0.2)};
   }
 `;
 

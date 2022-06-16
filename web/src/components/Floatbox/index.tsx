@@ -7,6 +7,9 @@ import Button from '../Button';
 
 import { Container, Searchbar, ThemeSwitch } from './styles';
 
+import detailedBlackBrand from '../../img/detailed-black-brand.svg';
+import detailedWhiteBrand from '../../img/detailed-white-brand.svg';
+
 interface FloatboxProps {
   contactsContainerHeight: number;
   toggleTheme: () => void;
@@ -24,19 +27,25 @@ const Floatbox: React.FC<FloatboxProps> = ({
     <Sticky
       top={1.8 * 18}
       enabled={contactsContainerHeight > 300}
-      bottomBoundary={contactsContainerHeight + 1.8 * 18}>
+      bottomBoundary={contactsContainerHeight + 1.8 * 18}
+    >
       <Container>
-        <span>Esfera Software</span>
-        <h1>Challenge</h1>
+        <img
+          src={
+            title === 'light'
+              ? detailedBlackBrand
+              : detailedWhiteBrand
+          }
+        />
 
         <Searchbar
-          placeholder='Pesquisar...'
-          onChange={e => {
+          placeholder="Pesquisar..."
+          onChange={(e) => {
             const query = e.target.value;
             setSearch(query);
           }}
         />
-        <Button text='Adicionar' isLink />
+        <Button text="Adicionar" isLink />
 
         <ThemeSwitch>
           <span>Dark mode</span>
@@ -52,7 +61,7 @@ const Floatbox: React.FC<FloatboxProps> = ({
             onColor={colors.secondary}
             onHandleColor={colors.primary}
             offHandleColor={colors.primary}
-            activeBoxShadow='0px 0px 1px 3px rgba(0, 0, 0, 0.2)'
+            activeBoxShadow="0px 0px 1px 3px rgba(0, 0, 0, 0.2)"
           />
         </ThemeSwitch>
       </Container>
