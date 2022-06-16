@@ -5,12 +5,12 @@ const dark = {
   title: 'dark',
   colors: {
     // Visual identity
-    primary: '#efc9a3',
-    secondary: '#9F8670',
+    primary: '#417D7A',
+    secondary: '#1A3C40',
     title: '#F5F7FA',
     text: '#CBD2D9',
     span: '#9AA5B1',
-    lightBox: '#52606d',
+    lightBox: '#1D5C63',
     box: '#1F2933',
     background: '#1e2025',
 

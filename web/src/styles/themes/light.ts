@@ -2,12 +2,12 @@ const light = {
   title: 'light',
   colors: {
     // Visual identity
-    primary: '#efc9a3',
-    secondary: '#9F8670',
+    primary: '#417D7A',
+    secondary: '#1A3C40',
     title: '#222',
     text: '#333',
     span: '#D5D5D5',
-    lightBox: '#FFFAF6',
+    lightBox: '#f6f6f6',
     box: '#fff',
     background: '#f6f6f6',
 

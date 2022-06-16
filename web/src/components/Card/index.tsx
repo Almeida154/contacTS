@@ -43,7 +43,9 @@ const Card: React.FC<CardProps> = ({ contact, onPress }) => {
             <li>
               <BiPhone size={14} />
               {contact.telephones.length}{' '}
-              {contact.telephones.length > 1 ? 'Telefones' : 'Telefone'}
+              {contact.telephones.length > 1
+                ? 'Telefones'
+                : 'Telefone'}
             </li>
             {contact.emails.length > 0 && (
               <li>
