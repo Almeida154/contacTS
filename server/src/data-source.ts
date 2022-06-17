@@ -14,10 +14,14 @@ export const AppDataSource = new DataSource({
   host: 'db',
   port: 3306,
   username: 'root',
-  password: 'challenge',
-  database: 'esferasoftware',
+  password: 'contacts',
+  database: 'contacts',
   synchronize: true,
   logging: false,
   entities: [Contact, Email, Telephone],
-  migrations: [CreateContactTable, CreateEmailTable, CreateTelephoneTable],
+  migrations: [
+    CreateContactTable,
+    CreateEmailTable,
+    CreateTelephoneTable,
+  ],
 });
