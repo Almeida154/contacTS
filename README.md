@@ -17,8 +17,6 @@
     <img alt="Repository size" src="https://img.shields.io/github/repo-size/Almeida154/contacTS?color=417D7A&labelColor=1A3C40">
 </p>
 
-<br>
-
 <p align="center">
   <img alt="ContacTS" src=".github/contacts-mockup.png" width="100%">
 </p>
