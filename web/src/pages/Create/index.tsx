@@ -80,7 +80,9 @@ const Create = () => {
       return false;
     }
 
-    const invalidPhones = phones.filter(phone => phone.length !== 15);
+    const invalidPhones = phones.filter(
+      (phone) => phone.length !== 15
+    );
     if (invalidPhones.length > 0) {
       showToast('error', 'Número inválido');
       return false;
@@ -101,7 +103,7 @@ const Create = () => {
 
   const areEmailsValid = (emails: string[]) => {
     var regex = /\S+@\S+\.\S+/;
-    var theresInvalid = emails.every(email => {
+    var theresInvalid = emails.every((email) => {
       return regex.test(email);
     });
     !theresInvalid && showToast('error', 'Email inválido');
@@ -127,7 +129,10 @@ const Create = () => {
       lastName,
       phones
     );
-    console.log('isAllMandatoryFieldsFilled', isAllMandatoryFieldsFilled);
+    console.log(
+      'isAllMandatoryFieldsFilled',
+      isAllMandatoryFieldsFilled
+    );
 
     var hasPhoneDuplicated = isDuplicated(phones);
     console.log('hasPhoneDuplicated', hasPhoneDuplicated);
@@ -191,7 +196,7 @@ const Create = () => {
   return (
     <>
       <Container>
-        <Link to='/'>
+        <Link to="/">
           <BiArrowBack size={24} />
         </Link>
         <FormContainer>
@@ -203,58 +208,58 @@ const Create = () => {
             <Fieldset>
               <FieldGroup>
                 <Field>
-                  <label className='mandatory' htmlFor='firstName'>
+                  <label className="mandatory" htmlFor="firstName">
                     Primeiro nome
                   </label>
                   <input
-                    type='text'
-                    name='firstName'
-                    id='firstName'
+                    type="text"
+                    name="firstName"
+                    id="firstName"
                     value={firstName}
-                    placeholder='Seu primeiro nome'
-                    onChange={e => setFirstName(e.target.value)}
+                    placeholder="Seu primeiro nome"
+                    onChange={(e) => setFirstName(e.target.value)}
                   />
                 </Field>
 
                 <Field>
-                  <label className='mandatory' htmlFor='lastName'>
+                  <label className="mandatory" htmlFor="lastName">
                     Segundo nome
                   </label>
                   <input
-                    type='text'
-                    name='lastName'
-                    id='lastName'
+                    type="text"
+                    name="lastName"
+                    id="lastName"
                     value={lastName}
-                    placeholder='Seu segundo nome'
-                    onChange={e => setLastName(e.target.value)}
+                    placeholder="Seu segundo nome"
+                    onChange={(e) => setLastName(e.target.value)}
                   />
                 </Field>
               </FieldGroup>
 
               <Field>
-                <label htmlFor='cpf'>Cpf</label>
+                <label htmlFor="cpf">Cpf</label>
                 <InputMask
                   mask={'999.999.999-99'}
                   maskPlaceholder={''}
-                  placeholder='Seu cpf'
-                  type='text'
-                  name='cpf'
-                  id='cpf'
-                  onChange={e => setCpf(e.target.value)}
+                  placeholder="Seu cpf"
+                  type="text"
+                  name="cpf"
+                  id="cpf"
+                  onChange={(e) => setCpf(e.target.value)}
                 />
               </Field>
 
               <Field>
-                <label htmlFor='email'>Email(s)</label>
+                <label htmlFor="email">Email(s)</label>
                 {emails.map((email, index) => (
                   <InputContainer key={index}>
                     <input
-                      type='email'
-                      name='email'
-                      id='email'
-                      placeholder='exemplo@email.com'
+                      type="email"
+                      name="email"
+                      id="email"
+                      placeholder="exemplo@email.com"
                       value={email}
-                      onChange={e => {
+                      onChange={(e) => {
                         var newEmail = e.target.value.toString();
                         var newEmails = [...emails];
                         newEmails[index] = newEmail;
@@ -263,18 +268,19 @@ const Create = () => {
                     />
                     {index > 0 && (
                       <DeleteInput
-                        type='button'
+                        type="button"
                         onClick={() => {
                           handleRemoveEmailInput(index);
                         }}
-                        className='deleteInput'>
+                        className="deleteInput"
+                      >
                         <BiTrash size={24} />
                       </DeleteInput>
                     )}
                   </InputContainer>
                 ))}
                 <Button
-                  text='Add'
+                  text="Add"
                   onPress={handleNewEmailInput}
                   isLink={false}
                   isShort
@@ -282,7 +288,7 @@ const Create = () => {
               </Field>
 
               <Field>
-                <label className='mandatory' htmlFor='phone'>
+                <label className="mandatory" htmlFor="phone">
                   Número(s)
                 </label>
                 {phones.map((phone, index) => (
@@ -290,12 +296,12 @@ const Create = () => {
                     <InputMask
                       mask={'(99) 99999-9999'}
                       maskPlaceholder={''}
-                      placeholder='(12) 34567-8912'
-                      type='text'
-                      name='phone'
-                      id='phone'
+                      placeholder="(12) 34567-8912"
+                      type="text"
+                      name="phone"
+                      id="phone"
                       value={phone}
-                      onChange={e => {
+                      onChange={(e) => {
                         var newPhone = e.target.value.toString();
                         var newPhones = [...phones];
                         newPhones[index] = newPhone;
@@ -304,18 +310,19 @@ const Create = () => {
                     />
                     {index > 0 && (
                       <DeleteInput
-                        type='button'
+                        type="button"
                         onClick={() => {
                           handleRemovePhoneInput(index);
                         }}
-                        className='deleteInput'>
+                        className="deleteInput"
+                      >
                         <BiTrash size={24} />
                       </DeleteInput>
                     )}
                   </InputContainer>
                 ))}
                 <Button
-                  text='Add'
+                  text="Add"
                   onPress={handleNewPhoneInput}
                   isLink={false}
                   isShort
@@ -323,7 +330,7 @@ const Create = () => {
               </Field>
             </Fieldset>
             <Button
-              text='Cadastrar'
+              text="Cadastrar"
               onPress={handleCreateContact}
               isLink={false}
               isSubmitButton
@@ -331,7 +338,9 @@ const Create = () => {
           </Form>
         </FormContainer>
       </Container>
+
       <Footer />
+
       <Toaster
         toastOptions={{
           success: {

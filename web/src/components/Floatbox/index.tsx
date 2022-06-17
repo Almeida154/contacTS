@@ -1,11 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useContext, useRef } from 'react';
 import Sticky from 'react-stickynode';
 import { ThemeContext } from 'styled-components';
 import Switch from 'react-switch';
 
+import { BiChevronsRight } from 'react-icons/bi';
+
 import Button from '../Button';
 
-import { Container, Searchbar, ThemeSwitch } from './styles';
+import {
+  Container,
+  Searchbar,
+  ThemeSwitch,
+  ToggleFloatbox,
+} from './styles';
 
 import detailedBlackBrand from '../../img/detailed-black-brand.svg';
 import detailedWhiteBrand from '../../img/detailed-white-brand.svg';
@@ -14,22 +21,45 @@ interface FloatboxProps {
   contactsContainerHeight: number;
   toggleTheme: () => void;
   setSearch: (query: string) => void;
+  floatBoxContainerRef: any;
 }
 
 const Floatbox: React.FC<FloatboxProps> = ({
   contactsContainerHeight,
   toggleTheme,
   setSearch,
+  floatBoxContainerRef,
 }) => {
   const { colors, title } = useContext(ThemeContext);
+  const toggleFloatboxRef = useRef<HTMLDivElement>(null);
+
+  function toggleFloatbox() {
+    console.log('touched');
+    const toggleIcon = toggleFloatboxRef.current;
+    const floatBoxContainer = floatBoxContainerRef.current;
+
+    toggleIcon.classList.toggle('active');
+    floatBoxContainer.classList.toggle('active');
+  }
 
   return (
     <Sticky
       top={1.8 * 18}
-      enabled={contactsContainerHeight > 300}
+      enabled={
+        contactsContainerHeight > 300 &&
+        document.documentElement.clientWidth > 535
+      }
       bottomBoundary={contactsContainerHeight + 1.8 * 18}
     >
       <Container>
+        <ToggleFloatbox
+          ref={toggleFloatboxRef}
+          onClick={toggleFloatbox}
+          className="toggle"
+        >
+          <BiChevronsRight size={32} />
+        </ToggleFloatbox>
+
         <img
           src={
             title === 'light'

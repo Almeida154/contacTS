@@ -10,6 +10,21 @@ export const Container = styled.div`
   img {
     width: 50%;
   }
+
+  @media (max-width: 535px) {
+    background: -webkit-gradient(
+      linear,
+      left top,
+      left bottom,
+      from(
+        ${(props) =>
+          props.theme.title === 'light'
+            ? rgba(255, 255, 255, 0.5)
+            : rgba(12, 16, 20, 0.5)}
+      )
+    );
+    backdrop-filter: blur(25px) saturate(180%);
+  }
 `;
 
 export const Searchbar = styled.input`
@@ -43,5 +58,14 @@ export const ThemeSwitch = styled.div`
   margin-top: 2rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+`;
+
+export const ToggleFloatbox = styled.div`
+  position: absolute;
+  right: 1.35rem;
+  top: ${metrics.padding};
+  display: flex;
+  justify-content: center;
   align-items: center;
 `;

@@ -1,4 +1,9 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useContext,
+  useRef,
+} from 'react';
 import { ThemeContext } from 'styled-components';
 import { BarLoader } from 'react-spinners';
 import { useNavigate } from 'react-router-dom';
@@ -43,14 +48,19 @@ interface HomeProps {
 
 const Home: React.FC<HomeProps> = ({ toggleTheme }) => {
   const [isLoading, setLoading] = useState(true);
-  const [contactsContainerHeight, setContactsContainerHeight] = useState(0);
+  const [contactsContainerHeight, setContactsContainerHeight] =
+    useState(0);
   const [contacts, setContacts] = useState<Contact[]>([]);
-  const [filteredContacts, setFilteredContacts] = useState<Contact[]>([]);
+  const [filteredContacts, setFilteredContacts] = useState<Contact[]>(
+    []
+  );
   const [search, setSearch] = useState('');
 
   const { colors } = useContext(ThemeContext);
   const navigate = useNavigate();
+
   const contactsContainerRef = useRef<HTMLDivElement>(null);
+  const floatBoxContainerRef = useRef<HTMLDivElement>(null);
 
   async function handleListContacts() {
     const contacts = await api.get('contacts');
@@ -59,14 +69,16 @@ const Home: React.FC<HomeProps> = ({ toggleTheme }) => {
 
   function handleLoadingTimeout() {
     setTimeout(() => {
-      const height = Number(contactsContainerRef.current?.clientHeight);
+      const height = Number(
+        contactsContainerRef.current?.clientHeight
+      );
       setContactsContainerHeight(height);
       setLoading(false);
     }, 1000);
   }
 
   useEffect(() => {
-    const filteredContacts = contacts.filter(contact =>
+    const filteredContacts = contacts.filter((contact) =>
       (contact.firstName + ' ' + contact.lastName)
         .toLocaleLowerCase()
         .includes(search.toLocaleLowerCase().trim())
@@ -95,32 +107,38 @@ const Home: React.FC<HomeProps> = ({ toggleTheme }) => {
       ) : (
         <>
           <Container>
-            <FloatboxContainer>
+            <FloatboxContainer ref={floatBoxContainerRef}>
               <Floatbox
                 contactsContainerHeight={contactsContainerHeight}
                 toggleTheme={toggleTheme}
                 setSearch={setSearch}
+                floatBoxContainerRef={floatBoxContainerRef}
               />
             </FloatboxContainer>
+
             <ContactsContainer ref={contactsContainerRef}>
               {contacts.length > 0 ? (
                 search === '' ? (
-                  contacts.map(contact => (
+                  contacts.map((contact) => (
                     <Card
                       key={contact.id}
                       contact={contact}
                       onPress={() =>
-                        navigate({ pathname: `/detail/${contact.id}` })
+                        navigate({
+                          pathname: `/detail/${contact.id}`,
+                        })
                       }
                     />
                   ))
                 ) : (
-                  filteredContacts.map(contact => (
+                  filteredContacts.map((contact) => (
                     <Card
                       key={contact.id}
                       contact={contact}
                       onPress={() =>
-                        navigate({ pathname: `/detail/${contact.id}` })
+                        navigate({
+                          pathname: `/detail/${contact.id}`,
+                        })
                       }
                     />
                   ))
@@ -133,7 +151,8 @@ const Home: React.FC<HomeProps> = ({ toggleTheme }) => {
                     color: colors.text,
                     opacity: 0.3,
                     marginTop: 16 * 1.8,
-                  }}>
+                  }}
+                >
                   Nada encontrado :(
                 </h2>
               )}

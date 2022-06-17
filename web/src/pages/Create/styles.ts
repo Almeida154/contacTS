@@ -12,7 +12,7 @@ export const Container = styled.div`
 `;
 
 export const FormContainer = styled.div`
-  background-color: ${props => props.theme.colors.box};
+  background-color: ${(props) => props.theme.colors.box};
   padding: ${metrics.padding};
   border-radius: ${metrics.radius};
 `;
@@ -37,6 +37,10 @@ export const FieldGroup = styled.div`
   flex: 1;
   display: flex;
   gap: ${metrics.padding};
+
+  @media (max-width: 700px) {
+    display: block;
+  }
 `;
 
 export const Field = styled.div`
@@ -47,25 +51,25 @@ export const Field = styled.div`
   gap: 0.9rem;
 
   input {
-    background-color: ${props => props.theme.colors.background};
+    background-color: ${(props) => props.theme.colors.background};
     border: 0;
     outline: 0;
     font-size: 1rem;
     padding: 1rem 1.5rem;
-    color: ${props => props.theme.colors.text};
+    color: ${(props) => props.theme.colors.text};
     flex: 1;
     overflow: hidden;
     border-radius: 6px;
 
     ::placeholder {
-      color: ${props => props.theme.colors.text};
+      color: ${(props) => props.theme.colors.text};
       opacity: 0.3;
     }
   }
 
   label.mandatory::after {
     content: '*';
-    color: ${props => props.theme.colors.primary};
+    color: ${(props) => props.theme.colors.primary};
     margin-left: 10px;
   }
 `;
@@ -98,6 +102,6 @@ export const DeleteInput = styled.button`
   width: 40px;
   border-start-start-radius: ${metrics.radius};
   border-end-start-radius: ${metrics.radius};
-  background-color: ${props => props.theme.colors.danger_light};
-  color: ${props => props.theme.colors.danger_strong};
+  background-color: ${(props) => props.theme.colors.danger_light};
+  color: ${(props) => props.theme.colors.danger_strong};
 `;

@@ -11,9 +11,9 @@ export const Container = styled.button`
   padding: 0.9rem;
   text-align: center;
   border: none;
-  outline: 2px solid ${props => props.theme.colors.primary};
-  background-color: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors.primary};
+  outline: 2px solid ${(props) => props.theme.colors.primary};
+  background-color: ${(props) => props.theme.colors.background};
+  color: ${(props) => props.theme.colors.primary};
   font-weight: 700;
   text-transform: uppercase;
   font-size: 0.8rem;
@@ -22,20 +22,26 @@ export const Container = styled.button`
   width: 100%;
   transition: 0.3s;
 
+  svg {
+    min-width: 20px;
+  }
+
   &.short {
-    width: 30%;
+    width: 40%;
     margin-top: 0;
 
-    outline: 2px solid ${props => props.theme.colors.span};
-    background-color: ${props => props.theme.colors.background};
-    color: ${props => props.theme.colors.span};
+    outline: 2px solid ${(props) => props.theme.colors.span};
+    background-color: ${(props) => props.theme.colors.background};
+    color: ${(props) => props.theme.colors.span};
 
     :hover {
-      background-color: ${props => rgba(props.theme.colors.span, 0.2)};
+      background-color: ${(props) =>
+        rgba(props.theme.colors.span, 0.2)};
     }
   }
 
   :hover {
-    background-color: ${props => rgba(props.theme.colors.primary, 0.2)};
+    background-color: ${(props) =>
+      rgba(props.theme.colors.primary, 0.2)};
   }
 `;
