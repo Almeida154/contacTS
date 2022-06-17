@@ -1,10 +1,10 @@
-<br><br>
+<br>
 
 <h1 align="center">
     <img alt="Ecoleta" title="Ecoleta" src=".github/detailed-white-brand.svg" width="220px" />
 </h1>
 
-<br><br>
+<br>
 
 <p align="center">
   <a href="#-Tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -15,8 +15,8 @@
 <br>
 
 <p align="center">
-    <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=7159c1&labelColor=417D7A">
-    <img alt="Repository size" src="https://img.shields.io/github/repo-size/Almeida154/contacTS?color=1A3C40">
+    <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=417D7A&labelColor=1A3C40">
+    <img alt="Repository size" src="https://img.shields.io/github/repo-size/Almeida154/contacTS?color=417D7A&labelColor=1A3C40">
 </p>
 
 <br>
