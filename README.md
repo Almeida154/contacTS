@@ -1,13 +1,15 @@
+<br><br>
+
 <h1 align="center">
     <img alt="Ecoleta" title="Ecoleta" src=".github/detailed-white-brand.svg" width="220px" />
 </h1>
 
-<br>
+<br><br>
 
 <p align="center">
-  <a href="#Tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#Projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
-  <a href="#Como rodar">Como rodar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-Tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-Projeto">Projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="#-Como-rodar">Como rodar</a>
 </p>
 
 <br>
@@ -20,14 +22,14 @@
 <br>
 
 <p align="center">
-  <img alt="ContacTS" src=".github/mockup.png" width="100%">
+  <img alt="ContacTS" src=".github/contacts-mockup.png" width="100%">
 </p>
 
 <br>
 
 ### 🚀 Tecnologias
 
-## 👉 **_Backend_**
+##### **_Backend_**
 
 - [Node.js](https://nodejs.org/en/)
 - [Express](http://expressjs.com/)
@@ -36,7 +38,7 @@
 - [Nodemon](https://nodemon.io)
 - [Typeorm](https://github.com/typeorm/typeorm)
 
-## 👉 **_Frontend_**
+##### **_Frontend_**
 
 - [React.js](https://reactjs.org)
 - [Styled Components](https://styled-components.com/)
@@ -47,7 +49,7 @@
 - [React Hot Toast](https://github.com/timolins/react-hot-toast)
 - [React Switch](https://github.com/markusenglund/react-switch)
 
-## 👉 **_General_**
+##### **_General_**
 
 - [Typescript](https://www.typescriptlang.org/)
 - [Docker](https://www.docker.com/get-started/)
@@ -57,6 +59,8 @@
 ### 🤳 Projeto
 
 O ContacTS é uma aplicação web desenvolvida para armazenar contatos. Um contato pode ter mais de um email e mais de um número cadastrado. A página de formulário tem prevenção contra erros, como CPF inválido ou campos obrigatórios não preenchidos. Além disso, o sistema conta com Theme Switcher e tela de carregamento.
+
+<br>
 
 ### 🧑‍💻 Como rodar
 
