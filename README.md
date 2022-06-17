@@ -12,8 +12,6 @@
   <a href="#-Como-rodar">Como rodar</a>
 </p>
 
-<br>
-
 <p align="center">
     <img alt="License" src="https://img.shields.io/static/v1?label=license&message=MIT&color=417D7A&labelColor=1A3C40">
     <img alt="Repository size" src="https://img.shields.io/github/repo-size/Almeida154/contacTS?color=417D7A&labelColor=1A3C40">
@@ -24,8 +22,6 @@
 <p align="center">
   <img alt="ContacTS" src=".github/contacts-mockup.png" width="100%">
 </p>
-
-<br>
 
 ### 🚀 Tecnologias
 
