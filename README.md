@@ -1,7 +1,7 @@
 <br>
 
 <h1 align="center">
-    <img alt="Ecoleta" title="Ecoleta" src=".github/detailed-white-brand.svg" width="220px" />
+    <img alt="Contacts" title="Contacts" src=".github/detailed-white-brand.svg" width="220px" />
 </h1>
 
 <br>
